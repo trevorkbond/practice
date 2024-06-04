@@ -1,9 +1,20 @@
 public class BinaryTree {
     private Node root;
     private int size;
+    public BinaryTree() {
+        root = null;
+        size = 0;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
 
     public boolean add(int insertVal) {
-        return false;
+        root = new Node(insertVal);
+        size++;
+        return true;
     }
 
     public boolean remove(int removeVal) {

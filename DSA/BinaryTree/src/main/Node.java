@@ -7,6 +7,10 @@ public class Node {
         return value;
     }
 
+    public Node(int value) {
+        this.value = value;
+    }
+
     public void setValue(int value) {
         this.value = value;
     }
