@@ -15,9 +15,22 @@ class BinaryTreeTest {
     }
 
     @Test
-    void add() {
-        Assertions.assertTrue(binaryTree.add(3));
-        Assertions.assertEquals(binaryTree.getSize(), 1);
+    void addSuccess() {
+        assertTrue(binaryTree.add(3));
+        assertEquals(binaryTree.getSize(), 1);
+        assertTrue(binaryTree.add(2));
+        assertEquals(binaryTree.getSize(), 2);
+        assertTrue(binaryTree.add(1));
+        assertEquals(binaryTree.getSize(), 3);
+        assertTrue(binaryTree.add(0));
+        assertEquals(binaryTree.getSize(), 4);
+    }
+
+    @Test
+    void addFailure() {
+        binaryTree.add(3);
+        Assertions.assertFalse(binaryTree.add(3));
+        assertEquals(binaryTree.getSize(), 1);
     }
 
     @Test
