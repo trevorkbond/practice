@@ -11,11 +11,7 @@ public class BinaryTree {
     }
 
     public boolean add(int addVal) {
-        if (addHelper(addVal, root) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return addHelper(addVal, root) != null;
     }
 
     private Node addHelper(int addVal, Node currentNode) {
@@ -40,7 +36,23 @@ public class BinaryTree {
         return false;
     }
 
+    private Node findRemoveHelper(Node currentNode, int val, boolean isRemove) {
+        if (currentNode == null) {
+            return null;
+        } else if (val > currentNode.getValue()) {
+            currentNode = findRemoveHelper(currentNode.getRight(), val, isRemove);
+        } else if (val < currentNode.getValue()) {
+            currentNode = findRemoveHelper(currentNode.getLeft(), val, isRemove);
+        } else if (val == currentNode.getValue()) {
+            //FIXME: implement deleting node if isRemove is true
+            if (!isRemove) {
+                return currentNode;
+            }
+        }
+        return currentNode;
+    }
+
     public boolean contains(int findVal) {
-        return false;
+        return findRemoveHelper(root, findVal, false) != null;
     }
 }

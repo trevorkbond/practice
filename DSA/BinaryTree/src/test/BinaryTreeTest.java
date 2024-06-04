@@ -1,17 +1,17 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeTest {
 
-    private static BinaryTree binaryTree;
+    private BinaryTree binaryTree;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeEach
+    void setUp() {
         binaryTree = new BinaryTree();
-
     }
 
     @Test
@@ -38,6 +38,17 @@ class BinaryTreeTest {
     }
 
     @Test
-    void contains() {
+    void containsSuccess() {
+        binaryTree.add(3);
+        assertTrue(binaryTree.contains(3));
+        binaryTree.add(5);
+        assertTrue(binaryTree.contains(5));
+    }
+
+    @Test
+    void containsFailure() {
+        assertFalse(binaryTree.contains(7));
+        binaryTree.add(7);
+        assertFalse(binaryTree.contains(6));
     }
 }
