@@ -34,7 +34,12 @@ class BinaryTreeTest {
     }
 
     @Test
-    void remove() {
+    void removeSuccess() {
+        binaryTree.add(3);
+        binaryTree.add(2);
+        binaryTree.remove(2);
+//        assertEquals(binaryTree.getSize(), 1);
+        assertFalse(binaryTree.contains(2));
     }
 
     @Test

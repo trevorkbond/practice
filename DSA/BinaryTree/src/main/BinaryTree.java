@@ -33,26 +33,51 @@ public class BinaryTree {
     }
 
     public boolean remove(int removeVal) {
-        return false;
+        return removeHelper(root, removeVal) != null;
     }
 
-    private Node findRemoveHelper(Node currentNode, int val, boolean isRemove) {
+    private Node removeHelper(Node currentNode, int removeVal) {
         if (currentNode == null) {
             return null;
-        } else if (val > currentNode.getValue()) {
-            currentNode = findRemoveHelper(currentNode.getRight(), val, isRemove);
-        } else if (val < currentNode.getValue()) {
-            currentNode = findRemoveHelper(currentNode.getLeft(), val, isRemove);
-        } else if (val == currentNode.getValue()) {
-            //FIXME: implement deleting node if isRemove is true
-            if (!isRemove) {
-                return currentNode;
+        } else if (removeVal > currentNode.getValue()) {
+            currentNode.setRight(removeHelper(currentNode.getRight(), removeVal));
+        } else if (removeVal < currentNode.getValue()) {
+            currentNode.setLeft(removeHelper(currentNode.getLeft(), removeVal));
+        } else {
+            if (currentNode.getLeft() == null) {
+                return currentNode.getRight();
+            } else if (currentNode.getRight() == null) {
+                return currentNode.getLeft();
             }
+            currentNode.setValue(getMinPredecessor(currentNode.getRight()));
+            currentNode.setRight(removeHelper(currentNode.getRight(), currentNode.getValue()));
         }
         return currentNode;
     }
 
+    private int getMinPredecessor(Node currentNode) {
+        int minVal = currentNode.getValue();
+        while (currentNode.getLeft() != null) {
+            minVal = currentNode.getValue();
+            currentNode = currentNode.getLeft();
+        }
+        return minVal;
+    }
+
     public boolean contains(int findVal) {
-        return findRemoveHelper(root, findVal, false) != null;
+        return findHelper(root, findVal) != null;
+    }
+
+    private Node findHelper(Node currentNode, int val) {
+        if (currentNode == null) {
+            return null;
+        } else if (val > currentNode.getValue()) {
+            currentNode = findHelper(currentNode.getRight(), val);
+        } else if (val < currentNode.getValue()) {
+            currentNode = findHelper(currentNode.getLeft(), val);
+        } else if (val == currentNode.getValue()) {
+            return currentNode;
+        }
+        return currentNode;
     }
 }
