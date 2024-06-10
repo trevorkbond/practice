@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class BinaryTree {
     private Node root;
     private int size;
@@ -12,6 +14,21 @@ public class BinaryTree {
 
     public boolean add(int addVal) {
         return addHelper(addVal, root) != null;
+    }
+
+    public ArrayList<Integer> getNodesInList() {
+        ArrayList<Integer> items = new ArrayList<>();
+        inOrderTraversal(root, items);
+        return items;
+    }
+
+    private void inOrderTraversal(Node root, ArrayList<Integer> items) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraversal(root.getLeft(), items);
+        items.add(root.getValue());
+        inOrderTraversal(root.getRight(), items);
     }
 
     private Node addHelper(int addVal, Node currentNode) {

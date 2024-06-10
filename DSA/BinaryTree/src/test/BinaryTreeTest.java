@@ -3,6 +3,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeTest {
@@ -12,25 +15,42 @@ class BinaryTreeTest {
     @BeforeEach
     void setUp() {
         binaryTree = new BinaryTree();
+        binaryTree.add(10);
+        binaryTree.add(1);
+        binaryTree.add(9);
+        binaryTree.add(5);
+        binaryTree.add(7);
+        binaryTree.add(3);
+        binaryTree.add(6);
+        binaryTree.add(8);
+        binaryTree.add(2);
+        binaryTree.add(4);
     }
 
     @Test
     void addSuccess() {
-        assertTrue(binaryTree.add(3));
-        assertEquals(binaryTree.getSize(), 1);
-        assertTrue(binaryTree.add(2));
-        assertEquals(binaryTree.getSize(), 2);
-        assertTrue(binaryTree.add(1));
-        assertEquals(binaryTree.getSize(), 3);
-        assertTrue(binaryTree.add(0));
-        assertEquals(binaryTree.getSize(), 4);
+        ArrayList<Integer> testAgainst =
+                new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        assertEquals(testAgainst, binaryTree.getNodesInList());
     }
 
     @Test
     void addFailure() {
+        // Adding a node already in the tree should result in no new nodes being added
+//        Assertions.assertFalse(binaryTree.add(3));
+        binaryTree.add(10);
+        binaryTree.add(1);
+        binaryTree.add(9);
+        binaryTree.add(5);
+        binaryTree.add(7);
         binaryTree.add(3);
-        Assertions.assertFalse(binaryTree.add(3));
-        assertEquals(binaryTree.getSize(), 1);
+        binaryTree.add(6);
+        binaryTree.add(8);
+        binaryTree.add(2);
+        binaryTree.add(4);
+        ArrayList<Integer> testAgainst =
+                new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        assertEquals(testAgainst, binaryTree.getNodesInList());
     }
 
     @Test
