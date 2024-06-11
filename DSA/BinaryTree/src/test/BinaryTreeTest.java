@@ -37,7 +37,6 @@ class BinaryTreeTest {
     @Test
     void addFailure() {
         // Adding a node already in the tree should result in no new nodes being added
-//        Assertions.assertFalse(binaryTree.add(3));
         binaryTree.add(10);
         binaryTree.add(1);
         binaryTree.add(9);
@@ -55,25 +54,35 @@ class BinaryTreeTest {
 
     @Test
     void removeSuccess() {
-        binaryTree.add(3);
-        binaryTree.add(2);
-        binaryTree.remove(2);
-//        assertEquals(binaryTree.getSize(), 1);
-        assertFalse(binaryTree.contains(2));
+        binaryTree.remove(1);
+        binaryTree.remove(3);
+        binaryTree.remove(5);
+        binaryTree.remove(7);
+        binaryTree.remove(9);
+        ArrayList<Integer> testAgainst =
+                new ArrayList<>(Arrays.asList(2, 4, 6, 8, 10));
+        assertEquals(testAgainst, binaryTree.getNodesInList());
     }
 
     @Test
     void containsSuccess() {
-        binaryTree.add(3);
         assertTrue(binaryTree.contains(3));
-        binaryTree.add(5);
+        assertTrue(binaryTree.contains(7));
         assertTrue(binaryTree.contains(5));
+        assertTrue(binaryTree.contains(2));
+        assertTrue(binaryTree.contains(10));
+        assertTrue(binaryTree.contains(9));
+        assertTrue(binaryTree.contains(8));
+        assertTrue(binaryTree.contains(4));
+        assertTrue(binaryTree.contains(1));
+        assertTrue(binaryTree.contains(6));
     }
 
     @Test
     void containsFailure() {
+        binaryTree.remove(7);
         assertFalse(binaryTree.contains(7));
-        binaryTree.add(7);
-        assertFalse(binaryTree.contains(6));
+        assertFalse(binaryTree.contains(11));
+        assertFalse(binaryTree.contains(-1));
     }
 }

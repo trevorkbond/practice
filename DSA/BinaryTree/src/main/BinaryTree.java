@@ -44,7 +44,7 @@ public class BinaryTree {
         } else if (addVal > currentNode.getValue()) {
             currentNode.setRight(addHelper(addVal, currentNode.getRight()));
         } else if (addVal == currentNode.getValue()) {
-            return null;
+            return currentNode;
         }
         return currentNode;
     }
