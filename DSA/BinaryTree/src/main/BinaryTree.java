@@ -61,13 +61,16 @@ public class BinaryTree {
         } else if (removeVal < currentNode.getValue()) {
             currentNode.setLeft(removeHelper(currentNode.getLeft(), removeVal));
         } else {
-            if (currentNode.getLeft() == null) {
+            if (currentNode.getLeft() == null && currentNode.getRight() != null) {
                 return currentNode.getRight();
-            } else if (currentNode.getRight() == null) {
+            } else if (currentNode.getRight() == null && currentNode.getLeft() != null) {
                 return currentNode.getLeft();
+            } else if (currentNode.getLeft() == null && currentNode.getRight() == null) {
+                return null;
+            } else {
+                currentNode.setValue(getMinPredecessor(currentNode.getRight()));
+                currentNode.setRight(removeHelper(currentNode.getRight(), currentNode.getValue()));
             }
-            currentNode.setValue(getMinPredecessor(currentNode.getRight()));
-            currentNode.setRight(removeHelper(currentNode.getRight(), currentNode.getValue()));
         }
         return currentNode;
     }
@@ -75,8 +78,8 @@ public class BinaryTree {
     private int getMinPredecessor(Node currentNode) {
         int minVal = currentNode.getValue();
         while (currentNode.getLeft() != null) {
-            minVal = currentNode.getValue();
             currentNode = currentNode.getLeft();
+            minVal = currentNode.getValue();
         }
         return minVal;
     }
