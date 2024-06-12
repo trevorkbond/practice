@@ -46,6 +46,7 @@ public class BinaryTree {
         } else if (addVal == currentNode.getValue()) {
             return currentNode;
         }
+        currentNode.updateHeight();
         return currentNode;
     }
 

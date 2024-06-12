@@ -65,6 +65,32 @@ class BinaryTreeTest {
     }
 
     @Test
+    void removeFailure() {
+        binaryTree.remove(0);
+        binaryTree.remove(11);
+        binaryTree.remove(-1);
+        ArrayList<Integer> testAgainst =
+                new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+        assertEquals(testAgainst, binaryTree.getNodesInList());
+        binaryTree.remove(1);
+        binaryTree.remove(3);
+        binaryTree.remove(5);
+        binaryTree.remove(7);
+        binaryTree.remove(9);
+        testAgainst =
+                new ArrayList<>(Arrays.asList(2, 4, 6, 8, 10));
+        assertEquals(testAgainst, binaryTree.getNodesInList());
+        binaryTree.remove(1);
+        binaryTree.remove(3);
+        binaryTree.remove(5);
+        binaryTree.remove(7);
+        binaryTree.remove(9);
+        testAgainst =
+                new ArrayList<>(Arrays.asList(2, 4, 6, 8, 10));
+        assertEquals(testAgainst, binaryTree.getNodesInList());
+    }
+
+    @Test
     void containsSuccess() {
         assertTrue(binaryTree.contains(3));
         assertTrue(binaryTree.contains(7));
