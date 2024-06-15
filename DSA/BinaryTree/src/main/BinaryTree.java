@@ -38,6 +38,7 @@ public class BinaryTree {
                 root = currentNode;
             }
             size++;
+            System.out.printf("Added node with val %d, height is %d\n", currentNode.getValue(), currentNode.getHeight());
             return currentNode;
         } else if (addVal < currentNode.getValue()) {
             currentNode.setLeft(addHelper(addVal, currentNode.getLeft()));
@@ -47,6 +48,8 @@ public class BinaryTree {
             return currentNode;
         }
         currentNode.updateHeight();
+        System.out.printf("Node with val %d has height of %d\n", currentNode.getValue(), currentNode.getHeight());
+        System.out.println(currentNode.getImbalanceType());
         return currentNode;
     }
 
