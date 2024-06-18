@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinaryTree {
     private Node root;
@@ -51,6 +53,49 @@ public class BinaryTree {
         System.out.printf("Node with val %d has height of %d\n", currentNode.getValue(), currentNode.getHeight());
         System.out.println(currentNode.getImbalanceType());
         return currentNode;
+    }
+
+    @Override
+    public String toString() {
+
+        Queue<Node> nodeQueue = new LinkedList<>();
+        nodeQueue.add(root);
+        StringBuilder builder = new StringBuilder();
+
+        int numAdded = 0;
+        int numSkipped = 0;
+        int level = 0;
+
+        while (!nodeQueue.isEmpty()) {
+            Node currentNode = nodeQueue.poll();
+
+            builder.append(currentNode.getValue());
+
+            if (level == 0) {
+                level++;
+                builder.append('\n');
+            } else if ((numAdded + numSkipped) == (int) (Math.pow(2, level) + 1)) {
+                builder.append('\n');
+                level++;
+            } else {
+                builder.append(' ');
+            }
+            numAdded++;
+
+            if (currentNode.getLeft() != null) {
+                nodeQueue.add(currentNode.getLeft());
+            } else {
+                numSkipped++;
+            }
+
+            if (currentNode.getRight() != null) {
+                nodeQueue.add(currentNode.getRight());
+            } else {
+                numSkipped++;
+            }
+
+        }
+        return builder.toString();
     }
 
     public boolean remove(int removeVal) {

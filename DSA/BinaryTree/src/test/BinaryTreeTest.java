@@ -34,7 +34,7 @@ class BinaryTreeTest {
 
     @Test
     void imbalanceTest() {
-
+        System.out.println(binaryTree);
     }
 
     @Test
